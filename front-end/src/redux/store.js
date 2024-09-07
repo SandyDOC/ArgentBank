@@ -1,0 +1,1 @@
+// configuration et création du store Redux : importer et combiner vos reducers, créer le store Redux et l'exporter pour qu'il puisse être utilisé dans votre application
