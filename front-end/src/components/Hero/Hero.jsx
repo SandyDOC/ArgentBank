@@ -1,12 +1,12 @@
+import backgroundImg from "./../../assets/images/bank-tree.webp";
 // import "./Hero.css";
 // import "./../Hero/Hero.css";
 import "./../Header/Header.css";
-import backgroundImg from "./../../assets/images/bank-tree.jpeg";
 
 const Hero = () => {
     return (
-        <div className="hero">
-            <img src={backgroundImg} alt="bank tree" className="hero"/>
+        <div className="hero-container">
+            <img src={backgroundImg} alt="bank tree" className="hero-img"/>
             <section className="hero-content">
                 <h2 className="sr-only">Promoted Content</h2>
                 <p className="subtitle">No fees.</p>

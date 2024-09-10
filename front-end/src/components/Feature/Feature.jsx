@@ -1,4 +1,4 @@
-import IconChat from "./../../assets/images/icon-chat.png";
+// import IconChat from "./../../assets/images/icon-chat.webp";
 
 import "./Feature.css";
 

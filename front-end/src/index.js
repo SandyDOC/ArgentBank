@@ -9,6 +9,7 @@ import Footer from './components/Footer/Footer';
 
 import Home from './pages/Home/Home';
 import LogIn from "./pages/LogIn/LogIn";
+import User from "./pages/User/User";
 import Error from "./pages/Error/Error";
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
@@ -19,7 +20,8 @@ root.render(
       <Header />
       <Routes>
         <Route path="/" element={<Home />}/>
-        <Route path="/logIn" element={<LogIn />}/>
+        <Route path="/login" element={<LogIn />}/>
+        <Route path="/user" element={<User />}/>
         <Route path="*" element={<Error/>}/>
       </Routes> 
       <Footer/>
