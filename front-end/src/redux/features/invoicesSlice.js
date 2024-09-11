@@ -4,11 +4,16 @@ import axios from 'axios';
 
 // URL de base de l'API
 // const API_URL = 'https://api.example.com/invoices';
-const API_URL = 'http://localhost:3001/api-docs';
+const API_URL = 'http://localhost:3001/';
+
+// actions :
+// fetchUser qui retourne un utilisateur
+// updateUser qui changera le username de l'utilisateur
+
 
 // Actions asynchrones
-export const fetchInvoices = createAsyncThunk('invoices/fetchInvoices', async () => {
-  const response = await axios.get(API_URL);
+export const fetchInvoices = createAsyncThunk(API_URL+'invoices/fetchInvoices', async () => {
+  const response = await axios.get(fetchInvoices);
   return response.data;
 });
 

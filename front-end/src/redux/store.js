@@ -8,11 +8,11 @@
 // })
 // store.js
 import { configureStore } from '@reduxjs/toolkit';
-import invoicesReducer from './features/invoicesSlice';
+import userReducer from './userSlice';
 
 export const store = configureStore({
   reducer: {
-    invoices: invoicesReducer,
+    user: userReducer,
   },
 });
 
