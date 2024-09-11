@@ -1,5 +1,3 @@
-// import IconChat from "./../../assets/images/icon-chat.webp";
-
 import "./Feature.css";
 
 const Feature = ({ icon, title, text }) => {

@@ -6,8 +6,6 @@ import IconMoney from "./../../assets/images/icon-money.webp";
 import IconSecurity from "./../../assets/images/icon-security.webp";
 import "./../Home/Home.css";
 
-// import data from "./../../data/feature.json";
-
 const Home = () => {
     return (
         <main>
@@ -31,12 +29,7 @@ const Home = () => {
                 is always safe."
                 />
             </section>
-
-            {/* {data.map((item) => (
-          <Feature key={item.id} icon={IconChat} title={item.title} text={item.content} />
-        ))} */}
-
-        </main>
+       </main>
     );
 }
 
