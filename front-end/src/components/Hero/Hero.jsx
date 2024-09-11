@@ -1,7 +1,5 @@
 import backgroundImg from "./../../assets/images/bank-tree.webp";
-// import "./Hero.css";
-// import "./../Hero/Hero.css";
-import "./../Header/Header.css";
+import "./Hero.css";
 
 const Hero = () => {
     return (
