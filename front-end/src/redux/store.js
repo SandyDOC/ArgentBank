@@ -9,10 +9,18 @@
 // store.js
 import { configureStore } from '@reduxjs/toolkit';
 import userReducer from './userSlice';
+// import apiReducer from './api';
+// import loginReducer from './login';
+
+// import accountReducer from './accountSlice';
 
 export const store = configureStore({
   reducer: {
     user: userReducer,
+    // api: apiReducer,
+    // login: loginReducer,
+
+    // account: accountReducer,
   },
 });
 

@@ -5,13 +5,17 @@
     font-weight: bold;
     padding: 10px;
   } */
-  
-  .header {
-    color: #fff;
-    margin-bottom: 2rem;
-  }
-  
-  /* .transaction-button {
+
+.header {
+  color: #fff;
+  margin-bottom: 2rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* .transaction-button {
     display: block;
     width: 100%;
     padding: 8px;
@@ -22,4 +26,3 @@
     background-color: #00bc77;
     color: #fff;
   } */
-  

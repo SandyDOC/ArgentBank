@@ -4,10 +4,10 @@
 // Exemple :nom de fonction 'reducer' addItemToBasket. Cette fonction renverra le nouveau state qui inclut le nouvel élément.
 // Dans votre composant, vous pouvez appeler la fonction 'reducer' en utilisant le hook dispatch
 
-import { useDispatch } from 'react-redux'
-import { addItemToBasket } from './basketSlice'
-const dispatch = useDispatch()
+// import { useDispatch } from 'react-redux'
+// import { addItemToBasket } from './basketSlice'
+// const dispatch = useDispatch()
 
-return ( 
-  <button onClick={() => dispatch(addItemToBasket(item))}>Add</button>
-)
+// return ( 
+//   <button onClick={() => dispatch(addItemToBasket(item))}>Add</button>
+// )
