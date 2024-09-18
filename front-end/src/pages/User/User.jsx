@@ -21,6 +21,18 @@ const User = () => {
         setIsEditing(true);  // Passe en mode édition, le bouton "Edit Name" disparaît
     };
 
+    const transaction = {
+        "name" : "sdlfksjmfldsf",
+        "amount": "sdfdsf",
+        "status": "ok"
+    }
+
+    let transactionsComponents ;
+
+    for(let i = 0; i < 3; i++) {
+       // transactionsComponents += <Transaction amount={transaction.name} .../>
+    }
+
     return (
         <main className="main bg-dark">
             <div className="header">
@@ -38,6 +50,7 @@ const User = () => {
                 )}
             </div>
             <h2 className="sr-only">Accounts</h2>
+            {transactionsComponents}
             <Account />
             {/* {accountData && accountData.account.map((account, index) => <AccountCard key={account.title + "-" + index} title={account.title} amount={account.amount} description={account.description} />)}
 	 */}

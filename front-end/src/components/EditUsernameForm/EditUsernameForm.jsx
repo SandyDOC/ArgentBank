@@ -1,10 +1,11 @@
 import "./EditUsername.css";
 
-// import React, { useState } from 'react';
-// import { useDispatch, useSelector } from 'react-redux'; // Ajout de useSelector pour accéder à l'état global
+ import React, { useState } from 'react';
+ import { useDispatch, useSelector } from 'react-redux'; // Ajout de useSelector pour accéder à l'état global
 // import { updateUserProfile } from '../redux/userSlice';
 
 const EditUsernameForm = () => {
+    const { userName, lastName, firstName } = useSelector((state) => state.user);
     // const EditUsernameForm = ({ currentUsername, onClose }) => {
     // Récupération du firstName et lastName depuis le store Redux
     // const { firstName, lastName } = useSelector((state) => state.user);
@@ -26,7 +27,7 @@ const EditUsernameForm = () => {
                 <input
                     type="text"
                     id="username"
-                    // value={newUsername}
+                    value={userName}
                     // onChange={(e) => setNewUsername(e.target.value)} // Mise à jour à chaque modification du champ
                     className="edit-username-input"
                 />

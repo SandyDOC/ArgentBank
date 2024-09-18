@@ -7,6 +7,7 @@
   padding-bottom: 250px;
 }
 
+h1.numberError,
 p.numberError {
   color: var(--green-color);
   font-weight: 800;
