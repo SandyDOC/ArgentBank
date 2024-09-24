@@ -1,18 +1,36 @@
+// import Account from "../../components/Account/Account";
+// import EditUsernameForm from "../../components/EditUsernameForm/EditUsernameForm";
+// // import Button from "../../components/Button/Button";
+// import "./User.css";
+// import { useSelector } from 'react-redux';
+// import { useState } from 'react';
+
+// const User = () => {
+//     // const accountData = useSelector(selectUserAccountData(userId));
+//     // Récupérer l'utilisateur depuis Redux
+//       const user = useSelector((state) => state.user);
+
+//     //   if (!user.token) {
+//     //     return <p>You need to log in to access this page.</p>;
+//     //   }
+//     // État local pour gérer l'affichage du formulaire de modification du nom d'utilisateur
+//     const [isEditing, setIsEditing] = useState(false);
+
+//     // Fonction pour gérer le clic sur le bouton "Edit Name"
+//     const handleEditClick = () => {
+//         setIsEditing(true);  // Passe en mode édition, le bouton "Edit Name" disparaît
+//     };
+
 import Account from "../../components/Account/Account";
 import EditUsernameForm from "../../components/EditUsernameForm/EditUsernameForm";
-// import Button from "../../components/Button/Button";
 import "./User.css";
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
 
 const User = () => {
-    // const accountData = useSelector(selectUserAccountData(userId));
     // Récupérer l'utilisateur depuis Redux
-    //   const user = useSelector((state) => state.user);
+    const user = useSelector((state) => state.user);
 
-    //   if (!user.token) {
-    //     return <p>You need to log in to access this page.</p>;
-    //   }
     // État local pour gérer l'affichage du formulaire de modification du nom d'utilisateur
     const [isEditing, setIsEditing] = useState(false);
 
@@ -21,28 +39,34 @@ const User = () => {
         setIsEditing(true);  // Passe en mode édition, le bouton "Edit Name" disparaît
     };
 
-    const transaction = {
-        "name" : "sdlfksjmfldsf",
-        "amount": "sdfdsf",
-        "status": "ok"
-    }
+    // Données fictives pour les comptes
+    const dataAccount = [
+        {
+            "title": "Argent Bank Checking (x8349)",
+            "amount": "$2,082.79",
+            "description": "Available Balance"
+        },
+        {
+            "title": "Argent Bank Checking (x8349)",
+            "amount": "$10,928.42",
+            "description": "Available Balance"
+        },
+        {
+            "title": "Argent Bank Credit Card (x8349)",
+            "amount": "$184.30",
+            "description": "Current Balance"
+        }
+    ];
 
-    let transactionsComponents ;
-
-    for(let i = 0; i < 3; i++) {
-       // transactionsComponents += <Transaction amount={transaction.name} .../>
+    // Vérifier si l'utilisateur est défini avant d'accéder aux propriétés
+    if (!user || !user.token) {
+        return <p>You need to log in to access this page.</p>;
     }
 
     return (
         <main className="main bg-dark">
             <div className="header">
-                {/* <h1>Welcome back<br />
-                {userFirstName && userFirstName} {userLastName && userLastName}!</h1> */}
-                {/* <p>User ID: {user.id}</p> */}
-
-                {/* <p>Email: {user.email}</p> */}
-                <h1>Welcome back<br />Tony Jarvis!</h1>
-                {/* Si isEditing est vrai, afficher EditUsernameForm, sinon afficher le bouton */}
+                <h1>Welcome back<br />{user.firstName} {user.lastName} !</h1>
                 {!isEditing ? (
                     <button className="edit-button btn" onClick={handleEditClick}>Edit Name</button>
                 ) : (
@@ -50,10 +74,15 @@ const User = () => {
                 )}
             </div>
             <h2 className="sr-only">Accounts</h2>
-            {transactionsComponents}
-            <Account />
-            {/* {accountData && accountData.account.map((account, index) => <AccountCard key={account.title + "-" + index} title={account.title} amount={account.amount} description={account.description} />)}
-	 */}
+            {/* Map sur les comptes pour afficher chaque Account */}
+            {dataAccount.map((account, index) => (
+                <Account
+                    key={index}
+                    title={account.title}
+                    amount={account.amount}
+                    description={account.description}
+                />
+            ))}
         </main>
     );
 }

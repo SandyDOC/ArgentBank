@@ -44,10 +44,12 @@ function Header() {
 
                             {/* {user.name} */}
                         </NavLink>
-                        <button className="main-nav-item" onClick={handleLogout}>
+                        <NavLink className="main-nav-item" onClick={handleLogout}>
+                        {/* <button className="main-nav-item" onClick={handleLogout}> */}
                             <i className="fa fa-sign-out"></i>
                             Sign Out
-                        </button>
+                        </NavLink>
+                        {/* </button> */}
                     </>
                 ) : (
                     <NavLink className="main-nav-item" to="/login">
