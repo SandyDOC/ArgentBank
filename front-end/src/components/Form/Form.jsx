@@ -35,7 +35,6 @@ const Form = () => {
     };
 
     const handleSubmit = async (e) => {
-        console.log("validation formulaire")
         e.preventDefault();
 
         // Dispatch de l'action loginUser avec l'email et le password
@@ -49,10 +48,9 @@ const Form = () => {
             dispatch(fetchUser(token));
             if (rememberMe) {
                 // Gérer la logique "Remember Me", potentiellement avec localStorage
-                localStorage.setItem('token', resultAction.payload.token);
+                localStorage.setItem('token', resultAction.payload.body.token);
             }
             dispatch(clearForm()); // Nettoyer le formulaire après connexion
-            
             navigate('/user'); // Redirection après succès
         } else {
             console.error('Login failed:', resultAction.payload);
