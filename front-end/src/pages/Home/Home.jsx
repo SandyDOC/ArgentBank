@@ -1,5 +1,5 @@
-import Feature from "../../components/Feature/Feature";
 import Hero from "./../../components/Hero/Hero";
+import Feature from "../../components/Feature/Feature";
 
 import IconChat from "./../../assets/images/icon-chat.webp";
 import IconMoney from "./../../assets/images/icon-money.webp";

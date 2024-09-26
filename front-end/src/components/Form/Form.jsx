@@ -1,20 +1,12 @@
-import "./Form.css";
-import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginUser, setEmail, setPassword, clearForm, fetchUser } from './../../redux/userSlice';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { loginUser, setEmail, setPassword, clearForm, fetchUser } from './../../redux/userSlice';
+import "./Form.css";
 
 const Form = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
-     // Vérification du token au chargement du composant
-     useEffect(() => {
-        const token = localStorage.getItem('token');
-        if (token) {
-            navigate('/user'); // Redirection si l'utilisateur est déjà connecté
-        }
-    }, [navigate]);
 
     // Accès aux valeurs des champs et au statut depuis Redux
     const { email, password, status, error } = useSelector((state) => state.user);
@@ -41,31 +33,27 @@ const Form = () => {
         const resultAction = await dispatch(
             loginUser({ email, password }) // Envoie les valeurs d'email et de password
         );
-        
-        
 
         if (loginUser.fulfilled.match(resultAction)) {
             const token = resultAction.payload.body.token;
-
             // permet d'avoir une sécurité supplémentaire
             // si l'utilisateur enregistre un token invalide dans le local storage
             // on l'empêche d'aller sur la partie user
-            /*const fetchUserAction = await dispatch(
-                fetchUser({ token }) // Envoie les valeurs d'email et de password
-            );*/
-            dispatch(fetchUser({ token }));
-           
+            // on  ne met d'accolade pour token car on veut passer directement la valeur du token
+            // ainsi on evite d'avoir un objet avec la clé/valeur
+            const fetchUserAction = await dispatch(
+                fetchUser( token ) // Envoie les valeurs d'email et de password
+            );
             // si le token est valide on redirige sur la partie user
-           // if(fetchUser.fulfilled.match(fetchUserAction)) {
+            if(fetchUser.fulfilled.match(fetchUserAction)) {
                 if (rememberMe) {
                     // Gérer la logique "Remember Me", potentiellement avec localStorage
                     localStorage.setItem('token', resultAction.payload.body.token);
                 }
                 dispatch(clearForm()); // Nettoyer le formulaire après connexion
                 navigate('/user'); // Redirection après succès
-           // }
-            
-        } 
+            }
+        }
     };
 
     return (

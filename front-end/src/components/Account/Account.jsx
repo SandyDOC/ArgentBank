@@ -1,7 +1,5 @@
 import "./Account.css";
-// import React from "react";
 
-// const Account = () => {
 const Account = ({ title, amount, description }) => {
 
     return (

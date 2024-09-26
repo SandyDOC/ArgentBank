@@ -1,26 +1,27 @@
-import Account from "../../components/Account/Account";
-import EditUsernameForm from "../../components/EditUsernameForm/EditUsernameForm";
-import "./User.css";
-import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { fetchUser } from '../../redux/userSlice';
+import { useSelector, useDispatch } from 'react-redux';
+import { useState, useEffect } from 'react';
+
+import EditUsernameForm from "../../components/EditUsernameForm/EditUsernameForm";
+import Account from "../../components/Account/Account";
+import "./User.css";
 
 const User = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
     // Récupérer l'utilisateur depuis Redux
-    // const user = useSelector((state) => state.user);
-    const { firstName, lastName, userName, token, status } = useSelector((state) => state.user);
+    
+   
+     const { firstName, lastName,  token} = useSelector((state) => state.user);
+    
     // État local pour gérer l'affichage du formulaire de modification du nom d'utilisateur
     const [isEditing, setIsEditing] = useState(false);
 
     // Charger les informations de l'utilisateur au montage du composant
     useEffect(() => {
-        if (token) {
-            dispatch(fetchUser(token)); // Requête pour récupérer les données utilisateur
-        } else {
+       
+        if (!token) {
             navigate('/login'); // Si pas de token, rediriger vers la page de connexion
         }
     }, [dispatch, token, navigate]);
@@ -61,6 +62,7 @@ const User = () => {
             <div className="header">
                 <h1>Welcome back<br />
                     {/* {user.firstName || user.newFirstName} {user.lastName || user.newLastName} ! */}
+                    {/* {firstName || newFirstName} {lastName || newLastName} ! */}
                     {firstName} {lastName} !
                 </h1>
                 {!isEditing ? (
