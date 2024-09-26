@@ -6,6 +6,7 @@ const API_URL = 'http://localhost:3001/api/v1/';
 
 // Actions asynchrones
 export const fetchUser = createAsyncThunk('user/profile', async (token) => {
+  console.log(token);
   const response = await axios.get(`${API_URL}user/profile`, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -89,6 +90,11 @@ const userSlice = createSlice({
       state.email = '';
       state.password = '';
     },
+    // clearUsernameForm: (state) => { // Nouveau reducer pour réinitialiser le formulaire d'édition de username
+    //   state.firstName = '';
+    //   state.lastName = '';
+    //   state.userName = '';
+    // },
     logout: (state) => {
       // Réinitialise l'état utilisateur
          state.id = null;
@@ -118,34 +124,36 @@ const userSlice = createSlice({
         state.status = 'loading';
       })
       .addCase(fetchUser.fulfilled, (state, action) => {
-        const { status, message, body } = action.payload;
+        const {  message, body } = action.payload;
         
-        if (status === 200) {
+       
           state.id = body.id;
           state.email = body.email;
           state.firstName = body.firstName;
           state.lastName = body.lastName;
           state.userName = body.userName;
           state.status = 'succeeded';
-        } else {
-          state.status = 'failed';
-          state.error = message;
-        }
+        
         state.apiMessage = message;
       })
       .addCase(fetchUser.rejected, (state, action) => {
         state.status = 'failed';
-        state.error = action.error.message;
+        state.error = "Utilisateur non autorisé";
+       
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.token = action.payload.body.token;
         state.status = 'succeeded';
         state.password = '';  // Réinitialiser le password après login
       })
+      .addCase(loginUser.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = "Login ou mot de passe incorrect";
+      })
   },
 });
 
 // Export des actions pour les utiliser dans les composants
-export const { setEmail, setPassword, clearForm, logout, newUser } = userSlice.actions;
+export const { setEmail, setPassword, clearForm, clearUsernameForm, logout, newUser } = userSlice.actions;
 export default userSlice.reducer;
 

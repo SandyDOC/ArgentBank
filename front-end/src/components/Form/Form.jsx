@@ -42,19 +42,30 @@ const Form = () => {
             loginUser({ email, password }) // Envoie les valeurs d'email et de password
         );
         
+        
 
         if (loginUser.fulfilled.match(resultAction)) {
             const token = resultAction.payload.body.token;
-            dispatch(fetchUser(token));
-            if (rememberMe) {
-                // Gérer la logique "Remember Me", potentiellement avec localStorage
-                localStorage.setItem('token', resultAction.payload.body.token);
-            }
-            dispatch(clearForm()); // Nettoyer le formulaire après connexion
-            navigate('/user'); // Redirection après succès
-        } else {
-            console.error('Login failed:', resultAction.payload);
-        }
+
+            // permet d'avoir une sécurité supplémentaire
+            // si l'utilisateur enregistre un token invalide dans le local storage
+            // on l'empêche d'aller sur la partie user
+            /*const fetchUserAction = await dispatch(
+                fetchUser({ token }) // Envoie les valeurs d'email et de password
+            );*/
+            dispatch(fetchUser({ token }));
+           
+            // si le token est valide on redirige sur la partie user
+           // if(fetchUser.fulfilled.match(fetchUserAction)) {
+                if (rememberMe) {
+                    // Gérer la logique "Remember Me", potentiellement avec localStorage
+                    localStorage.setItem('token', resultAction.payload.body.token);
+                }
+                dispatch(clearForm()); // Nettoyer le formulaire après connexion
+                navigate('/user'); // Redirection après succès
+           // }
+            
+        } 
     };
 
     return (
