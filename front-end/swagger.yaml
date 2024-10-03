@@ -199,44 +199,90 @@ definitions:
     properties:
       status:
         type: integer
+        example: "200"
       message:
         type: string
       month:
         type: string
       transactions:
-        type: object
-        properties:
-          id:
-            type: string
-            description: Id of the first transaction
-          date:
-            type: string
-            format: date
-            description: Date of the transaction
-          description:
-            type: string
-            description: Description transaction
-          amount:
-            type: number
-            description: Amount 
-          balance:
-            type: number
-            description: Balance
-            
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+             type: string
+             description: Id of the first transaction
+            date:
+             type: string
+             format: date
+             description: Date of the transaction
+            description:
+             type: string
+             description: Description transaction
+            amount:
+             type: number
+             description: Amount
+            balance:
+             type: number
+             description: Balance
+            type:
+             type: string
+             description: Type of transaction
+            category:
+              type: string
+              description: Category of transaction
+            note:
+              type: string
+              description: comments
+    example:
+      status: 200
+      message: "Transactions retrieved successfully"
+      month: "February"
+      transactions:
+        - id: "1"
+          date: "27/02/2020"
+          description: "Golden Sun Bakery"
+          amount: "$8.00"
+          balance: "$298.00"
+          type: "Electronic"
+          category: "Food"
+          note: "Lorem ipsum"
+        - id: "2"
+          date: "27/02/2020"
+          description: "Golden Sun Bakery"
+          amount: "$8.00"
+          balance: "$298.00"
+          type: "Electronic"
+          category: "Hobbies"
+          note: "Lorem"
   TransactionResponse:
-    properties:
-      status:
-       type: integer
-      message: 
-       type: string
-      body:
-       type: object
-       properties:
-        id:
-          type: integer
-        transaction type:
-          type: string
-          description: Type of transaction
+     type: object
+     properties:
+      id:
+        type: string
+        description: Id of the first transaction
+      date:
+        type: string
+        format: date
+        description: Date of the transaction
+      description:
+        type: string
+        description: Description transaction
+      amount:
+        type: number
+        description: Amount
+      balance:
+        type: number
+        description: Balance
+      type:
+        type: string
+        description: Type of transaction
+      category:
+        type: string
+        description: Category of transaction
+      note:
+        type: string
+        description: comments
   UpdateTransactionResponse:
     type: object
     properties:
@@ -246,8 +292,6 @@ definitions:
       note:
         type: string
         description: New notes of this transaction
-    
-
   User:
     properties:
       email:
