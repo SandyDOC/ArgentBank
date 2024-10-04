@@ -9,7 +9,7 @@ basePath: /api/v1
 schemes:
   - http
 paths:
-  /user/transactions:
+  /transactions:
     get:
       security:
         - Bearer: []
@@ -32,7 +32,7 @@ paths:
           description: Transactions not found
         "500":
           description: Internal Server Error
-  /user/transaction/{id}:
+  /transactions/{TransactionId}:
     get:
       security:
         - Bearer: []
@@ -42,7 +42,7 @@ paths:
       description: API for fetching a transaction details
       parameters:
         - in: path
-          name: id
+          name: TransactionId
           description: Id of the transaction that needs to be edited
           required: true
           type: string
@@ -70,7 +70,7 @@ paths:
       description: API for updating a transaction
       parameters:
         - in: path
-          name: id
+          name: TransactionId
           description: Id of the transaction
           required: true
           type: string
@@ -237,52 +237,63 @@ definitions:
     example:
       status: 200
       message: "Transactions retrieved successfully"
-      month: "February"
-      transactions:
-        - id: "1"
-          date: "27/02/2020"
-          description: "Golden Sun Bakery"
-          amount: "$8.00"
-          balance: "$298.00"
-          type: "Electronic"
-          category: "Food"
-          note: "Lorem ipsum"
-        - id: "2"
-          date: "27/02/2020"
-          description: "Golden Sun Bakery"
-          amount: "$8.00"
-          balance: "$298.00"
-          type: "Electronic"
-          category: "Hobbies"
-          note: "Lorem"
+      body:
+        month: "February"
+        transactions:
+          - id: "1"
+            date: "27/02/2020"
+            description: "Golden Sun Bakery"
+            amount: "$8.00"
+            balance: "$298.00"
+            type: "Electronic"
+            category: "Food"
+            note: "Lorem ipsum"
+          - id: "2"
+            date: "27/02/2020"
+            description: "Golden Sun Bakery"
+            amount: "$8.00"
+            balance: "$298.00"
+            type: "Electronic"
+            category: "Hobbies"
+            note: "Lorem"
   TransactionResponse:
      type: object
      properties:
-      id:
+      status:
+        type: integer
+        example: "200"
+      message:
         type: string
-        description: Id of the first transaction
-      date:
-        type: string
-        format: date
-        description: Date of the transaction
-      description:
-        type: string
-        description: Description transaction
-      amount:
-        type: number
-        description: Amount
-      balance:
-        type: number
-        description: Balance
-      type:
-        type: string
-        description: Type of transaction
-      category:
-        type: string
-        description: Category of transaction
-      note:
-        type: string
-        description: comments
+        example: "Success"
+      body:
+        type: object
+        properties:
+          id:
+            type: string
+            description: Id of the first transaction
+          date:
+            type: string
+            format: date
+            description: Date of the transaction
+          description:
+            type: string
+            description: Description transaction
+          amount:
+            type: number
+            description: Amount
+          balance:
+            type: number
+            description: Balance
+          type:
+            type: string
+            description: Type of transaction
+          category:
+            type: string
+            description: Category of transaction
+          note:
+            type: string
+            description: comments
+    
   UpdateTransactionResponse:
     type: object
     properties:
