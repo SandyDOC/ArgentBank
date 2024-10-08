@@ -1,13 +1,12 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from '../../redux/userSlice';
-import Logo from "./../../assets/images/argentBankLogo.png";
+import Logo from "./../../assets/images/argentBankLogo.webp";
 import "./Header.css";
 
 
 function Header() {
     // Accéder à l'état de l'utilisateur dans Redux
-    // const user = useSelector((state) => state.user); // Permet d'accéder à l'état user dans Redux, info sur l'utilisateur actuellement connecté
     const { userName, token } = useSelector((state) => state.user);
 
     const dispatch = useDispatch();

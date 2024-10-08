@@ -10,37 +10,30 @@ const Form = () => {
 
     // Accès aux valeurs des champs et au statut depuis Redux
     const { email, password, status, error } = useSelector((state) => state.user);
-
     // Local state pour le champ 'remember me'
     const [rememberMe, setRememberMe] = useState(false);
-
+    
+    // Gestion des champs du formulaire
     const handleUsernameChange = (e) => {
         dispatch(setEmail(e.target.value));  // Associe le username au champ email
     };
-
     const handlePasswordChange = (e) => {
         dispatch(setPassword(e.target.value));  // Associe le mot de passe à Redux
     };
-
     const handleRememberMeChange = (e) => {
         setRememberMe(e.target.checked);
     };
-
+    // Gestion de la soumission du formulaire
     const handleSubmit = async (e) => {
-        e.preventDefault();
-
+        e.preventDefault(); // Empêche le rechargement de la page
         // Dispatch de l'action loginUser avec l'email et le password
         const resultAction = await dispatch(
             loginUser({ email, password }) // Envoie les valeurs d'email et de password
         );
-
+        // Vérifie si la requête de connexion a réussi en utilisant fulfilled.match(). Si c'est le cas, on extrait le token de la réponse
         if (loginUser.fulfilled.match(resultAction)) {
             const token = resultAction.payload.body.token;
-            // permet d'avoir une sécurité supplémentaire
-            // si l'utilisateur enregistre un token invalide dans le local storage
-            // on l'empêche d'aller sur la partie user
-            // on  ne met d'accolade pour token car on veut passer directement la valeur du token
-            // ainsi on evite d'avoir un objet avec la clé/valeur
+            // Validation du token et récupération des données utilisateur
             const fetchUserAction = await dispatch(
                 fetchUser( token ) // Envoie les valeurs d'email et de password
             );

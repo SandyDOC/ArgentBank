@@ -11,16 +11,13 @@ const User = () => {
     const dispatch = useDispatch();
 
     // Récupérer l'utilisateur depuis Redux
-    
-   
-     const { firstName, lastName,  token} = useSelector((state) => state.user);
-    
+    const { firstName, lastName, token } = useSelector((state) => state.user);
+
     // État local pour gérer l'affichage du formulaire de modification du nom d'utilisateur
     const [isEditing, setIsEditing] = useState(false);
 
     // Charger les informations de l'utilisateur au montage du composant
     useEffect(() => {
-       
         if (!token) {
             navigate('/login'); // Si pas de token, rediriger vers la page de connexion
         }
@@ -31,6 +28,7 @@ const User = () => {
         setIsEditing(true);  //Ouvrir le formulaire d'édition: Passe en mode édition, le bouton "Edit Name" disparaît
     };
     const handleCancelClick = () => setIsEditing(false); // Ferme le formulaire
+
     // Données fictives pour les comptes
     const dataAccount = [
         {
@@ -50,19 +48,10 @@ const User = () => {
         }
     ];
 
-    // Vérifier si l'utilisateur est défini avant d'accéder aux propriétés
-    //     if (!user || !user.token) {
-    //         // return <p>You need to log in to access this page.</p>;
-    //         navigate('/login'); // Redirection si l'utilisateur est déjà connecté
-    //     }
-    // };
-
     return (
         <main className="main bg-dark">
             <div className="header">
                 <h1>Welcome back<br />
-                    {/* {user.firstName || user.newFirstName} {user.lastName || user.newLastName} ! */}
-                    {/* {firstName || newFirstName} {lastName || newLastName} ! */}
                     {firstName} {lastName} !
                 </h1>
                 {!isEditing ? (

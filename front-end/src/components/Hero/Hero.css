@@ -12,14 +12,13 @@
 .hero-content {
   position: absolute;
   top: 2rem;
-  /* width: 200px; */
   background:var(--white-color);
   padding: 2rem;
   text-align: left;
   width: 100%;
   max-width: 218px;
-  /* margin: 0 auto; */
 }
+
 @media (max-width: 768px) {
   .hero-content {
     position: absolute;

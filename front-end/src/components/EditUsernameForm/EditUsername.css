@@ -48,7 +48,6 @@
     border-radius: 5px;
     color: #fff;
     background-color:var(--green-color);
-    /* background-color: #28a745; */
     cursor: pointer;
   }
   
@@ -61,7 +60,6 @@
   
   .edit-username-cancel-button {
     background-color:var(--green-color);
-    /* background-color: #28a745; */
   }
   
   .edit-user-info-form input,

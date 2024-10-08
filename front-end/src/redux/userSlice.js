@@ -5,8 +5,8 @@ import axios from 'axios';
 const API_URL = 'http://localhost:3001/api/v1/';
 
 // Actions asynchrones
+// Récupèration du profil utilisateur à partir de l'API
 export const fetchUser = createAsyncThunk('user/profile', async (token) => {
-
   const response = await axios.get(`${API_URL}user/profile`, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -14,19 +14,18 @@ export const fetchUser = createAsyncThunk('user/profile', async (token) => {
   });
   return response.data;
 });
-
+// Envoie des identifiants utilisateur (email et mot de passe) à l'API pour tenter une connexion
 export const loginUser = createAsyncThunk('user/login', async (credentials) => {
   // console.log(credentials);
-  const response = await axios.post(`${API_URL}user/login`, credentials);  // Ici, on suppose que l'endpoint login existe
+  const response = await axios.post(`${API_URL}user/login`, credentials);  
   return response.data;
 });
-
+// Mise à jour des informations de l'utilisateur
 export const updateUser = createAsyncThunk('user/profile', async (user, { getState, rejectWithValue }) => {
   // console.log(user);
   try {
     const state = getState();
     const token = state.user.token || localStorage.getItem('token'); // Récupérer le token depuis Redux ou localStorage
-
     const response = await axios.put(`${API_URL}user/profile`, user, {
       headers: {
         Authorization: `Bearer ${token}`,  // Envoyer le token dans les en-têtes
@@ -41,8 +40,10 @@ export const updateUser = createAsyncThunk('user/profile', async (user, { getSta
   }
 });
 
+// Gestion des états utilisateur
 const userSlice = createSlice({
   name: 'user',
+  // État initial du slice "User"
   initialState: {
     id: null,
     firstName: '',
@@ -55,6 +56,7 @@ const userSlice = createSlice({
     error: '',
     apiMessage: '',
   },
+  // Actions pour mettre à jour l'état local du slice
   reducers: {
     // Action pour mettre à jour l'email
     setEmail: (state, action) => {
@@ -89,11 +91,14 @@ const userSlice = createSlice({
       state.userName = userName;
     }
   },
+  // Gestion des actions asynchrones
   extraReducers: (builder) => {
     builder
+    // Met à jour l'état à loading lorsque la requête pour récupérer l'utilisateur commence
       .addCase(fetchUser.pending, (state) => {
         state.status = 'loading';
       })
+      // Lorsque la requête réussit, met à jour les informations utilisateur dans le state avec les données de la réponse API
       .addCase(fetchUser.fulfilled, (state, action) => {
         const { message, body } = action.payload;
         state.id = body.id;
@@ -104,15 +109,18 @@ const userSlice = createSlice({
         state.status = 'succeeded';
         state.apiMessage = message;
       })
+      // Si la requête échoue, met à jour l'état en failed et affiche une erreu
       .addCase(fetchUser.rejected, (state, action) => {
         state.status = 'failed';
         state.error = "Utilisateur non autorisé";
       })
+      // Lorsque la connexion réussit, met à jour le token utilisateur dans le state
       .addCase(loginUser.fulfilled, (state, action) => {
         state.token = action.payload.body.token;
         state.status = 'succeeded';
-        state.password = '';  // Réinitialiser le password après login
+        state.password = '';  
       })
+      //  Si la connexion échoue, met à jour l'état en failed et affiche une erreur.
       .addCase(loginUser.rejected, (state, action) => {
         state.status = 'failed';
         state.error = "Login ou mot de passe incorrect";

@@ -10,16 +10,14 @@ const EditUsernameForm = ({ onCancel }) => {
     const { firstName, lastName, userName, status, error } = useSelector((state) => state.user);
 
     // État local pour stocker temporairement la nouvelle valeur de `userName`
-    const [newUserName, setNewUserName] = useState(userName);  // Initialiser avec la valeur existante
+    const [newUserName, setNewUserName] = useState(userName);  
 
     // Gestionnaire de soumission du formulaire
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         // Créer un objet avec la nouvelle valeur de userName
-        const userData = {
-            userName: newUserName // Utilise la valeur temporaire stockée dans l'état local
-        };
+        const userData = {userName: newUserName};
 
         // Envoyer les nouvelles données à l'API via l'action Redux updateUser
         const resultAction = await dispatch(updateUser(userData));

@@ -6,7 +6,6 @@ function Error() {
     <main className="container-error">
       <h1 className="numberError">Error</h1>
       <p className="explicationError">Oups! Une erreur s'est produite<br/>La page que vous demandez n'existe pas.</p>
-      {/* <p className="explicationError">Oups! La page que vous demandez n'existe pas.</p> */}
       <Link to="/" className="homeError">Retourner sur la page d’accueil</Link>
       <button onClick={() => window.location.reload()} className="homeError btn">Recharger la page</button>
     </main>

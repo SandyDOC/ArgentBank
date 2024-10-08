@@ -42,7 +42,6 @@ p.explicationError {
 
 @media (min-width: 920px) {
   p.explicationError {
-    /* font-size: $size-x-mediumSize; */
     line-height: 25.67px;
   }
 }
@@ -50,13 +49,10 @@ p.explicationError {
 a.homeError {
   padding: 60px;
   text-decoration: underline;
-  /* font-size: $size-x-mediumSize; */
-  /* font-weight: $fontMedium; */
 }
 
 @media (min-width: 920px) {
   a.homeError {
-    /* font-size: $size-x-small; */
     text-align: center;
   }
 }
