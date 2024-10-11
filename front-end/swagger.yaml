@@ -28,8 +28,6 @@ paths:
           description: Invalid Fields
         "401":
           description: Unauthorized
-        "404":
-          description: Transactions not found
         "500":
           description: Internal Server Error
   /transactions/{TransactionId}:
@@ -95,7 +93,6 @@ paths:
             description: Transaction not found
           "500":
             description: Internal Server Error
-
   /user/login:
     post:
       tags:
@@ -204,58 +201,72 @@ definitions:
         type: string
       month:
         type: string
-      transactions:
+      accounts:
         type: array
         items:
           type: object
           properties:
             id:
-             type: string
-             description: Id of the first transaction
-            date:
-             type: string
-             format: date
-             description: Date of the transaction
-            description:
-             type: string
-             description: Description transaction
-            amount:
-             type: number
-             description: Amount
-            balance:
-             type: number
-             description: Balance
-            type:
-             type: string
-             description: Type of transaction
-            category:
               type: string
-              description: Category of transaction
-            note:
+              description: Id of the account
+            name:
               type: string
-              description: comments
+              description: Name of account
+            transactions:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                   type: string
+                   description: Id of the first transaction
+                  date:
+                   type: string
+                   format: date
+                   description: Date of the transaction
+                  description:
+                   type: string
+                   description: Description transaction
+                  amount:
+                   type: number
+                   description: Amount
+                  balance:
+                   type: number
+                   description: Balance
+                  type:
+                   type: string
+                   description: Type of transaction
+                  category:
+                    type: string
+                    description: Category of transaction
+                  note:
+                    type: string
+                    description: comments
     example:
       status: 200
       message: "Transactions retrieved successfully"
       body:
         month: "February"
-        transactions:
-          - id: "1"
-            date: "27/02/2020"
-            description: "Golden Sun Bakery"
-            amount: "$8.00"
-            balance: "$298.00"
-            type: "Electronic"
-            category: "Food"
-            note: "Lorem ipsum"
-          - id: "2"
-            date: "27/02/2020"
-            description: "Golden Sun Bakery"
-            amount: "$8.00"
-            balance: "$298.00"
-            type: "Electronic"
-            category: "Hobbies"
-            note: "Lorem"
+        account:
+          - id: "1ef3"
+            name: "Checking"
+            transactions:
+              - id: "1"
+                date: "27/02/2020"
+                description: "Golden Sun Bakery"
+                amount: "$8.00"
+                balance: "$298.00"
+                type: "Electronic"
+                category: "Food"
+                note: "Lorem ipsum"
+              - id: "2"
+                date: "27/02/2020"
+                description: "Golden Sun Bakery"
+                amount: "$8.00"
+                balance: "$298.00"
+                type: "Electronic"
+                category: "Hobbies"
+                note: "Lorem"
   TransactionResponse:
      type: object
      properties:
@@ -293,7 +304,6 @@ definitions:
           note:
             type: string
             description: comments
-    
   UpdateTransactionResponse:
     type: object
     properties:
