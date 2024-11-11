@@ -1,4 +1,4 @@
-#ArgentBank
+# ArgentBank
 
 ## Compétences du projet
 
